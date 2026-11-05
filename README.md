@@ -47,7 +47,7 @@ src/
 
 ## Screenshots
 
-<!-- ### Home page (`/singer`)
+### Home page (`/singer`)
 ![Home](screenshots/home.png)
 
 ### First singer (`/singer/first`)
@@ -60,7 +60,7 @@ src/
 ![Third Singer](screenshots/third.png)
 
 ### Fourth singer (`/singer/fourth`)
-![Fourth Singer](screenshots/fourth.png) -->
+![Fourth Singer](screenshots/fourth.png)
 
 ## How `useParams` Works
 

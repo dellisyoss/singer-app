@@ -16,12 +16,21 @@ export default function SingerPage() {
   }
 
   return (
-    <input
-      className="lyric-input"
-      autoFocus
-      value={draft}
-      onChange={(e) => setDraft(e.target.value)}
-      onKeyDown={(e) => e.key === "Enter" && commit()}
-    />
+    <>
+      <div
+        className="now-singing"
+        style={{ background: singer.color, color: singer.text }}
+      >
+        Now singing: {singer.name}
+      </div>
+      <input
+        className="lyric-input"
+        autoFocus
+        placeholder="Type your lyric and press Enter..."
+        value={draft}
+        onChange={(e) => setDraft(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && commit()}
+      />
+    </>
   );
 }

@@ -17,7 +17,7 @@ export default function Layout() {
     }
   };
 
-  const colorOf = (id) => singers.find((s) => s.id === id)?.color;
+  const singerOf = (id) => singers.find((s) => s.id === id);
 
   return (
     <div className="container">
@@ -28,13 +28,23 @@ export default function Layout() {
       <Outlet context={{ draft, setDraft, commit }} />
 
       <div className="lyrics-box">
-        {lines.map((line, i) => (
-          <div key={i} className="line" style={{ background: colorOf(line.singerId) }}>
-            {line.text}
-          </div>
-        ))}
+        {lines.map((line, i) => {
+          const s = singerOf(line.singerId);
+          return (
+            <div
+              key={i}
+              className="line"
+              style={{ background: s?.color, color: s?.text }}
+            >
+              {line.text}
+            </div>
+          );
+        })}
         {current && draft && (
-          <div className="line" style={{ background: current.color }}>
+          <div
+            className="line draft"
+            style={{ background: current.color, color: current.text }}
+          >
             {draft}
           </div>
         )}

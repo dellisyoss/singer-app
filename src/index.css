@@ -1,25 +1,38 @@
+:root {
+  --pink: #E07A9A;
+  --pink-light: #F6D2DE;
+  --green-light: #CDE7B0;
+  --green: #6C8E4A;
+  --cream: #F9F2EA;
+}
+
 body {
   margin: 0;
   font-family: "Segoe UI", Arial, sans-serif;
-  background: #fff;
+  background: var(--cream);
+  color: #3d5a24;
 }
 
 .container {
   width: 900px;
   margin: 0 auto;
-  padding-top: 10px;
+  padding: 10px 0 40px;
 }
 
 .title {
   text-align: center;
-  font-size: 34px;
-  margin: 20px 0;
+  font-size: 36px;
+  margin: 24px 0;
+  color: var(--green);
 }
 
+/* ---------- singer buttons ---------- */
 .singer-nav {
   display: flex;
+  gap: 8px;
   width: 872px;
   margin: 0 auto;
+  padding-top: 8px;
 }
 
 .singer-btn {
@@ -27,14 +40,53 @@ body {
   height: 62px;
   line-height: 62px;
   text-align: center;
-  color: #fff;
   text-transform: uppercase;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  border-radius: 12px;
+  border-bottom: 5px solid transparent;
+  color: #fff;
+  box-sizing: border-box;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
 }
 
+/* text color per singer (matches singers.js) */
+.singer-btn:nth-child(1) { color: #ffffff; }
+.singer-btn:nth-child(2) { color: #ffffff; }
+.singer-btn:nth-child(3) { color: #3d5a24; }
+.singer-btn:nth-child(4) { color: #8a3a56; }
+
+.singer-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* selected singer: raised, bold, thick underline, shadow */
 .singer-btn.active {
-  box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.3);
+  transform: translateY(-6px);
+  font-weight: 700;
+  border-bottom: 5px solid #3d5a24;
+  box-shadow: 0 8px 14px rgba(61, 90, 36, 0.3);
+}
+
+/* when a singer is selected, fade the others */
+.singer-nav:has(.active) .singer-btn:not(.active) {
+  opacity: 0.45;
+}
+
+.singer-nav:has(.active) .singer-btn:not(.active):hover {
+  opacity: 0.8;
+}
+
+/* ---------- now singing + input ---------- */
+.now-singing {
+  width: 820px;
+  margin: 14px auto 0;
+  padding: 8px 16px;
+  border-radius: 10px 10px 0 0;
+  font-weight: 600;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
 .lyric-input {
@@ -42,21 +94,29 @@ body {
   box-sizing: border-box;
   width: 820px;
   height: 56px;
-  margin: 10px auto 0;
-  padding: 0 8px;
-  border: 2px solid #2b5fc0;
-  border-radius: 12px;
-  font-size: 14px;
+  margin: 0 auto;
+  padding: 0 14px;
+  border: 3px solid var(--green);
+  border-radius: 0 0 12px 12px;
+  background: #fff;
+  font-size: 15px;
   outline: none;
 }
 
+.lyric-input:focus {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 4px var(--pink-light);
+}
+
+/* ---------- lyrics box ---------- */
 .lyrics-box {
   box-sizing: border-box;
   width: 900px;
   min-height: 400px;
-  margin: 22px auto 0;
+  margin: 24px auto 0;
   padding: 30px 36px;
-  border: 3px solid #ddd;
+  background: #fff;
+  border: 3px solid var(--pink-light);
   border-radius: 18px;
 }
 
@@ -64,13 +124,27 @@ body {
   height: 40px;
   line-height: 40px;
   margin-bottom: 6px;
-  padding-left: 10px;
+  padding-left: 14px;
   border-radius: 8px;
-  color: #fff;
   font-size: 16px;
 }
 
+.line.draft {
+  opacity: 0.75;
+}
+
+/* ---------- error pages ---------- */
 .message {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 30px;
+}
+
+.message a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 20px;
+  background: var(--pink);
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
 }
