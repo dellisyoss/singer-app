@@ -95,3 +95,21 @@ The component uses the id to look up the matching singer in the data array. This
 - Refreshed on a singer URL (e.g. `/singer/third`) and the correct page loaded
 - Entered `/singer/unknown` and saw "Singer Not Found"
 - Entered an invalid path (e.g. `/abc`) and saw the 404 page
+
+## Reflection Questions
+
+### 1. Why is switching singer views with useState alone not equivalent to routing?
+
+With `useState`, the browser URL never changes. Back and Forward buttons don't work, refreshing resets the page, and you can't bookmark or share a link to a specific singer. Routing ties the view to the URL, so each singer has its own address that works on refresh, in history, and when opened directly.
+
+### 2. How does useParams allow a single component to support multiple singers?
+
+The route `/singer/:singerId` has a dynamic part. `useParams()` reads that part from the URL (for example `"second"`), and the component uses it to find the matching singer in the data array. The component's code stays the same and only the data it looks up changes, so one `SingerPage` serves every singer.
+
+### 3. What happens when a user opens /singer/unknown directly?
+
+The route still matches `/singer/:singerId`, with `singerId = "unknown"`. The lookup in the singers array finds nothing, so the page shows a "Singer Not Found" message with a Home link instead of crashing.
+
+### 4. Why should navigation use Link/NavLink rather than ordinary anchor tags for internal routes?
+
+An ordinary `<a>` tag makes the browser request a whole new page, which reloads the app and resets its state. `Link` and `NavLink` change the URL without a reload, and React Router re-renders only the matching route. `NavLink` also tells you which link is active, which is how the selected singer gets highlighted.
